@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sátor Számoló</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        label, select, button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Sátor Számoló</h1>
+    <label for="product">Válassz egy sátrat:</label>
+    <select id="product">
+        <option value="">-- Válassz --</option>
+        <option value="4,4,2,4,2,2,4,1,4,2,1,3,1">50 négyzetméteres sátor</option> <!-- Helyes értékek a 50 m² sátorra -->
+        <option value="6,6,4,4,2,2,6,2,4,2,2,4,1">100 négyzetméteres sátor</option> <!-- Helyes értékek a 100 m² sátorra -->
+        <option value="8,8,6,4,2,2,8,3,4,2,3,5,1">150 négyzetméteres sátor</option> <!-- Helyes értékek a 150 m² sátorra -->
+    </select>
+
+    <label for="quantity">Mennyiség:</label>
+    <input type="number" id="quantity" value="1" min="1">
+
+    <button onclick="calculate()">Számolás</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculate() {
+            const selectedProduct = document.getElementById('product').value;
+
+            if (!selectedProduct) {
+                document.getElementById('result').innerText = "Kérlek válassz egy sátrat!";
+                return;
+            }
+
+            const [g, l, c, z, x, y, v, m, k, n, j, h, d] = selectedProduct.split(','); // A sátor összes eleme
+            const quantity = parseInt(document.getElementById('quantity').value);
+
+            const totalG = g * quantity;
+            const totalL = l * quantity;
+            const totalC = c * quantity;
+            const totalZ = z * quantity;
+            const totalX = x * quantity;
+            const totalY = y * quantity;
+            const totalV = v * quantity;
+            const totalM = m * quantity;
+            const totalK = k * quantity; // Andrásvas
+			const totalN = n * quantity;
+            const totalJ = j * quantity; // Tetőponyva
+            const totalH = h * quantity; // Oldalponyva
+            const totalD = d * quantity; // Háromszögponyva
+			
+
+            document.getElementById('result').innerText = 
+                `${quantity} db sátorhoz szükséges:\nGerinc: ${totalG} db\nLáb: ${totalL} db\nPárkány: ${totalC} db\nVégponyvatartó: ${totalZ} db\nKözépsőláb: ${totalX} db\nKözépsőtalp: ${totalY} db\nSimatalp: ${totalV} db\nFogás piszka: ${totalM} db\nAndrásvas: ${totalK} db\nFogásDrótkötél: ${totalN} db\nTetőponyva: ${totalJ} db\nOldalponyva: ${totalH} db\nHáromszögponyva: ${totalD} db`;
+        }
+    </script>
+</body>
+</html>
